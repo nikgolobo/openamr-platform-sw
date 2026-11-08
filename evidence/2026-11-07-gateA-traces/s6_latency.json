@@ -1,0 +1,64 @@
+[
+  {
+    "label": "manual-press",
+    "press_at": 1794047578668,
+    "engage_sent_ms": 2,
+    "engage_reply_ms": 87,
+    "cancel_calls": [
+      {
+        "service": "/navigate_to_pose/_action/cancel_goal",
+        "sent_ms": 2
+      },
+      {
+        "service": "/compute_path_to_pose/_action/cancel_goal",
+        "sent_ms": 2
+      },
+      {
+        "service": "/dock_robot/_action/cancel_goal",
+        "sent_ms": 2
+      },
+      {
+        "service": "/undock_robot/_action/cancel_goal",
+        "sent_ms": 2
+      }
+    ],
+    "cancel_replies_ms": [
+      78,
+      59,
+      59,
+      87
+    ],
+    "lock_msg_ms": 66
+  },
+  {
+    "label": "statusbar-press",
+    "press_at": 1794047591913,
+    "engage_sent_ms": 3,
+    "engage_reply_ms": 259,
+    "cancel_calls": [
+      {
+        "service": "/navigate_to_pose/_action/cancel_goal",
+        "sent_ms": 4
+      },
+      {
+        "service": "/compute_path_to_pose/_action/cancel_goal",
+        "sent_ms": 4
+      },
+      {
+        "service": "/dock_robot/_action/cancel_goal",
+        "sent_ms": 4
+      },
+      {
+        "service": "/undock_robot/_action/cancel_goal",
+        "sent_ms": 4
+      }
+    ],
+    "cancel_replies_ms": [
+      130,
+      51,
+      53,
+      52
+    ],
+    "lock_msg_ms": 259
+  }
+]

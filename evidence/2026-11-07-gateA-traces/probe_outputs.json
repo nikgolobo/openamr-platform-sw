@@ -1,0 +1,65 @@
+{
+  "release_readiness_idle_12s": {
+    "status_counts": {
+      "/navigate_to_pose/_action/status": 0,
+      "/navigate_through_poses/_action/status": 0,
+      "/dock_robot/_action/status": 0,
+      "/undock_robot/_action/status": 0,
+      "/dock_trigger/status": 0
+    },
+    "release_success": false,
+    "release_message": "navigate_to_pose: status stale or never received; navigate_through_poses: status stale or never received; dock_robot: status stale or never received; undock_robot: status stale or never received",
+    "note": "dock_trigger/status used a guessed topic name; the gate's own dock subscription did NOT appear as a blocker, so the gate receives dock status fine."
+  },
+  "goal_populates_status": {
+    "before": {
+      "navigate_to_pose": 0,
+      "navigate_through_poses": 0,
+      "dock_robot": 0,
+      "undock_robot": 0
+    },
+    "after": {
+      "navigate_to_pose": 2,
+      "navigate_through_poses": 0,
+      "dock_robot": 0,
+      "undock_robot": 0
+    },
+    "goal_accepted": true,
+    "release_after": "navigate_through_poses: status stale or never received; dock_robot: status stale or never received; undock_robot: status stale or never received"
+  },
+  "unblock_attempt": {
+    "goals": {
+      "navigate_to_pose": "accepted -> cancel requested",
+      "navigate_through_poses": "accepted -> cancel requested",
+      "dock_robot": "server unavailable",
+      "undock_robot": "server unavailable"
+    },
+    "release_success": false,
+    "release_message": "dock_robot: status stale or never received; undock_robot: status stale or never received"
+  },
+  "smoother_component_test": {
+    "out_messages_total": 66,
+    "out_messages_after_cut": 6,
+    "zeros_after_cut": 1,
+    "first_zero_after_cut_ms": 263.0,
+    "tail_values": [
+      0.2,
+      0.2,
+      0.2,
+      0.2,
+      0.075,
+      0.0
+    ],
+    "params": {
+      "velocity_timeout": 0.3,
+      "max_decel": -2.5
+    }
+  },
+  "wall_direct_with_cm_active": {
+    "samples": 674,
+    "x_min": 0.0,
+    "x_max": 2.5,
+    "x_final": 2.5,
+    "note": "injection on /cmd_vel fought by collision_monitor republishing zeros; robot advanced at ~0.06 m/s effective"
+  }
+}

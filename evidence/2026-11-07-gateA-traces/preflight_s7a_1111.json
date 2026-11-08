@@ -1,0 +1,22 @@
+{
+  "bringup": 1,
+  "bringup_ok": true,
+  "safety_stop_gate": 1,
+  "safety_stop_gate_ok": true,
+  "twist_mux": 1,
+  "twist_mux_ok": true,
+  "collision_monitor": 1,
+  "collision_monitor_ok": true,
+  "ui_launch": 1,
+  "ui_launch_ok": true,
+  "service/safety/stop_lock_engage": true,
+  "service/safety/stop_lock_release": true,
+  "clock": "average rate: 333.524",
+  "lock_engaged_before_cmd": true,
+  "flow/cmd_vel_mux": 48,
+  "flow/cmd_vel_gated": 96,
+  "flow/odom": 120,
+  "flow/scan_filtered": 24,
+  "PASS": true,
+  "utc": "2026-11-07T09:11:27Z"
+}
