@@ -1,0 +1,24 @@
+PR #125 acceptance evidence — active dock + stop-during-dock
+Pin: platform-sw 25f40022 + interfaces cb83b22, patched openamrobot_docking launch (docking server + cmd_vel->cmd_vel_dock)
+Date: 2026-11-08
+
+1) Endpoints while docking (captured mid-motion, ~5 s into a DockRobot goal)
+   /cmd_vel       Publisher count: 1  -> collision_monitor   (subscriber: ros_gz_bridge)
+   /cmd_vel_dock  Publisher count: 2  -> dock_trigger, docking_server
+
+2) Five-hop trace, before Stop (7 s window)
+   /cmd_vel_dock      287 msgs / 287 nonzero / max 0.15 m/s
+   /cmd_vel_mux       260 / 260 / 0.15
+   /cmd_vel_gated     260 / 260 / 0.15
+   /cmd_vel_smoothed  134 / 134 / 0.15
+   /cmd_vel           134 / 134 / 0.15
+   odom travel        0.3705 m
+
+3) Stop pressed mid-motion (stop_lock_engage, t=7.03 s), 10 s tail
+   engaged_ok: true, lock_after: true
+   per hop after stop: nonzero drops to 2 in-flight messages, then zeros
+   travel after stop: 0.0219 m
+   dock goal result: status 5 CANCELED
+
+4) Earlier idle check (same build): /cmd_vel Publisher count: 1 (collision_monitor)
+5) Package tests: colcon test openamrobot_docking -> 14 tests, 0 failures (includes test_docking_launch_remap)
