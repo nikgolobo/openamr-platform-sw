@@ -34,6 +34,19 @@ span). Withdrawn as a physics claim; it stands only as an odometry observation.
 - `motion_truth.py` — prints physics x next to odom x and their gap. Run this before believing any
   motion number in this sim.
 
+## Real-time factor, and a correction to an earlier caveat
+
+I first wrote that the run "moved at ~0.08 m/s rather than the commanded 0.20", implying a control
+anomaly. It is not one. `rtf_probe.py` on the same stack: **RTF 0.384** (sim 3.840 s per 9.997 s wall,
+load average 24.7). At 0.20 m/s commanded that is **0.0768 m of ground per wall second**, against the
+0.0793 m/s measured (3.172 m in 40 s). The shortfall was the simulator running 2.6x slower than real
+time, not slip or a velocity ceiling.
+
+So the wall runs are consistent throughout: 135 s of wall-clock driving is ~52 s of sim, ~10 m of
+commanded travel, of which the base made 4.51 m and then stopped at the wall while the wheels kept
+turning. The contact conclusion is unchanged — it is if anything better supported, because the
+approach phase matches the commanded speed once RTF is accounted for.
+
 ## Not established
 
 Behaviour under the arbitration chain (cannot move at this head), speeds above 0.20 m/s, angled or
