@@ -1,0 +1,25 @@
+PR #125 — both-profile launch regressions executed under Jazzy
+Date: 2026-11-09  (VM: ros-jazzy, host 192.168.64.2)
+Head: 27b6c17 (+ the test/launch files as pushed)
+
+1) colcon build --packages-select openamrobot_docking
+   Finished <<< openamrobot_docking
+
+2) colcon test --packages-select openamrobot_docking
+   Summary: 14 tests, 0 errors, 0 failures, 0 skipped
+
+3) python3 -m pytest test/test_docking_launch_remap.py -v
+   test_sim_profile_starts_the_docking_server PASSED
+   test_real_profile_starts_the_docking_server PASSED
+   2 passed in 0.01s
+
+4) Negative control (remap line removed from docking_real.launch.py)
+   FAILED test_real_profile_starts_the_docking_server
+   1 failed, 1 passed
+   -> the test does fail when the remap is removed, per profile
+
+5) ros2 launch openamrobot_docking docking_real.launch.py --show-args
+   parses; lists:
+     'launch_docking_server'   default: 'true'
+     'docking_server_params'   default: nav2_params.yaml
+     'use_sim_time'            default: 'false'
