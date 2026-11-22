@@ -1,0 +1,8 @@
+# cancel_terminal_merged.py on merged head 3aa17d2 (nav-only, clean stack)
+release attempt 1 refused: navigate_to_pose: action-status discovery grace period not yet elapsed (goal-authority ledger read idle); navigate_through_poses: same
+release: released
+goal id: a0dc5ba4 public=2 real=2
+cancel reply: return_code=0 cancelled_goals=1
+  t+ 2s public=5 real=5
+FINAL public=5 (ABORTED) real=5 (ABORTED)
+odom travel during probe: 0.4734 m
