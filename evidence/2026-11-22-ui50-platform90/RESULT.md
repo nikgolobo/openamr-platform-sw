@@ -95,3 +95,44 @@ has to be taken on the robot, or in sim with a faster start (RTF near 1).
   in this session.
 - Anything on the robot: this is sim only, and per the 19 Nov ruling the bench robot runs a build with
   no gate.
+
+## 6. Fault handling — rosbridge lost while driving
+
+Killed `rosbridge_websocket` while the stick was held down at 0.19 m/s, kept holding through the
+outage, then released.
+
+**During the outage** the UI does not keep publishing — it has no transport to publish on, and it says
+so rather than pretending:
+
+```
+manual drive:  "rosbridge disconnected"
+banner:        "rosbridge is disconnected, so the lock state is unknown."
+controls:      Resume disabled — "Resume needs a rosbridge connection."
+               "Navigation goals are disabled: rosbridge disconnected."
+               "Docking disabled: rosbridge disconnected"
+console:       "Robot offline"
+```
+
+That is the fail-closed shape required of an operator UI: an unknown lock state is treated as stopped,
+not as permissive, and every control names the reason.
+
+**After rosbridge was restored** (note: relaunching the whole UI stack did *not* bring the socket back —
+port 9090 stayed closed; starting `rosbridge_websocket` on its own did), the page reloaded to:
+
+```
+console:  "Robot connected"
+banner:   "Stopped (software) — The platform stop lock is engaged.
+           No manual drive, program or mission can run."
+Resume:   available, and required
+```
+
+So a dropped connection neither leaves the robot drivable nor replays the command that was in flight:
+on reconnect the UI re-reads the latched lock and hands control back to the operator only through an
+explicit Resume.
+
+Not measured here: the platform-side zeroing during the outage. `velocity_smoother`'s
+`velocity_timeout: 0.3` is the mechanism, evidenced separately; this run is about the UI's behaviour.
+
+Environment note for anyone repeating it: killing rosbridge and restarting the *whole* UI launch leaves
+port 9090 closed while flask still serves 5050, which looks like "the UI never reconnects". Restart
+`rosbridge_websocket` alone and the reconnect path behaves as above.
