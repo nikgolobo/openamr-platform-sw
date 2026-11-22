@@ -1,0 +1,6 @@
+   7.8s  service present; polling
+   7.8s  refused: clock not ready (current time: 0.00, required: 1.0)
+   9.8s  refused: clock not ready (current time: 0.10, required: 1.0)
+  11.8s  refused: clock not ready (current time: 0.87, required: 1.0)
+  13.9s  refused: navigate_to_pose: action-status discovery grace period not yet elapsed (goal-authority ledger read idle); navigate_through_poses: action-sta
+  15.9s  RELEASED: released

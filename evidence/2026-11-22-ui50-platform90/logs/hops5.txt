@@ -1,0 +1,13 @@
+
+=== command path (140.1s window) ===
+hop                      msgs  nonzero   max|v|  first-after-start
+/ui/cmd_vel                62       61   0.1875   12.48s
+/cmd_vel_joy              239      235   0.1875   12.35s
+/cmd_vel_mux              155      127   0.1875   12.36s
+/cmd_vel_gated            181      127   0.1875   12.36s
+/cmd_vel_smoothed         225       62   0.1875   12.37s
+/cmd_vel                  197       53   0.1875   12.46s
+/odom                    1774            0.1875
+odom travel: 0.1168 m
+stop_lock: n=712 last=False
+stop_state: n=710 last=2 reason=''
