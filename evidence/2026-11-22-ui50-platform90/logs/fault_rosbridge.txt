@@ -1,0 +1,15 @@
+2026-11-22T22:34:47.015Z [+10768ms] overlay: 
+2026-11-22T22:34:48.827Z [+12575ms] confirm: Confirm resume
+2026-11-22T22:34:51.330Z [+15078ms] stick: {"x":318,"y":651}
+2026-11-22T22:34:51.371Z [+15119ms] holding forward
+2026-11-22T22:34:54.372Z [+18120ms] killing rosbridge NOW, while the stick is held
+Warning: Permanently added '192.168.64.2' (ED25519) to the list of known hosts.
+2026-11-22T22:34:54.570Z [+18318ms] ERR Command failed: ssh -i /Users/macuser/Documents/Codex/2026-09-28/re/work/lima-home/_config/user -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null macuser@192.168.64.2 pkill -f rosbridge_websocket; echo killed
+Warning: Permanently added '192.168.64.2' (ED25519) to the list of known hosts.
+2026-11-22T22:34:59.577Z [+23325ms] during outage: {"blocked":"rosbridge disconnected","connHint":"rosbridge is disconnected, so the lock state is unknown."}
+2026-11-22T22:34:59.684Z [+23432ms] shot: /Users/macuser/openamr-test/evidence/fault-rosbridge-down.png
+2026-11-22T22:35:01.593Z [+25341ms] stick released during/after outage
+2026-11-22T22:35:01.593Z [+25341ms] restarting rosbridge
+Warning: Permanently added '192.168.64.2' (ED25519) to the list of known hosts.
+2026-11-22T22:35:22.830Z [+46578ms] after reconnect: {"blocked":"rosbridge disconnected"}
+2026-11-22T22:35:22.914Z [+46662ms] shot: /Users/macuser/openamr-test/evidence/fault-after-reconnect.png

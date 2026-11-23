@@ -1,0 +1,10 @@
+before kill: {"blocked":"Stopped (software)","console":null}
+Warning: Permanently added '192.168.64.2' (ED25519) to the list of known hosts.
+during outage: {"blocked":"rosbridge disconnected","console":"Skip to main contentOpenAMRobotRobot workspaceMapRoutesMapsProgramsSchedulerMissionsStatusRobotDevicesHealthMetricsRecordingsEventsConsoleParametersFleetConfigNotesConsoleRobot offlineEN192.168.64.2:9090OpenAMRobotRobot workspaceENOfflineBatt99%Stop (software)Stopped (software)rosbridge is disconnected, so the lock state is unknown.This is a software stop. It is not the hardwired E-stop.ResumeResume needs a rosbridge connection.AlertsRobot connection lost/No planned path yetNavigation Unknown?Localization Stale?Set poseRe-localizeLayersMapObstacles (wide)Obstacles (near)LaserPathGoalWaypointsZonesTrailResetObstacles (wide)35%Obstacles (near)35%Laser32%Path95%Trail65%⤢CameraColorRGB SimRawLowBalancedHighStartFullCamera is pausedStart the video feed to see what the robot sees.Start cameraManualrosbridge disconnectedStop (software)Max Speed0.20 m/s0.050.5 m/sSpeed PresetsSlow · 0.10×Normal · 0.20×Fast · 0.40×SaveLinear velocity0.00m/sAngular 0.00 rad/sMap position0.00, 0.00mX / Y coordinatesHeading 0.0°Map-correctedDockingIdleDocking disabled: rosbridge disconnectedDockUndockSaved WaypointsSave hereNo saved waypoints yet — drive somewhere and save it, or right-click the map.Goal○ Send GoalFix Position⊕ Correct Robot's PositionWaypoint＋ Add WaypointHome⌂ Go HomeNavigation goals are disabled: rosbridge disconnected.Select a mode above to interact with the map.?"}
+Warning: Permanently added '192.168.64.2' (ED25519) to the list of known hosts.
+t+5s after rosbridge back: {"blocked":"Stopped (software)","console":null}
+t+10s after rosbridge back: {"blocked":"Stopped (software)","console":null}
+t+15s after rosbridge back: {"blocked":"Stopped (software)","console":null}
+t+20s after rosbridge back: {"blocked":"Stopped (software)","console":null}
+t+25s after rosbridge back: {"blocked":"Stopped (software)","console":null}
+t+30s after rosbridge back: {"blocked":"Stopped (software)","console":null}
