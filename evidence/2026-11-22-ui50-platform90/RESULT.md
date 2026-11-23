@@ -116,8 +116,8 @@ console:       "Robot offline"
 That is the fail-closed shape required of an operator UI: an unknown lock state is treated as stopped,
 not as permissive, and every control names the reason.
 
-**After rosbridge was restored** (note: relaunching the whole UI stack did *not* bring the socket back —
-port 9090 stayed closed; starting `rosbridge_websocket` on its own did), the page reloaded to:
+**After rosbridge was restored**, with the page left open and no reload: the UI reconnected on its
+own and within 5 s was back to
 
 ```
 console:  "Robot connected"
@@ -126,9 +126,13 @@ banner:   "Stopped (software) — The platform stop lock is engaged.
 Resume:   available, and required
 ```
 
-So a dropped connection neither leaves the robot drivable nor replays the command that was in flight:
-on reconnect the UI re-reads the latched lock and hands control back to the operator only through an
-explicit Resume.
+Measured in 5 s steps for 30 s: `Stopped (software)` from t+5 s onward, never drivable without an
+explicit Resume. So a dropped connection neither leaves the robot drivable nor replays the command
+in flight; recovery does not require a page reload.
+
+(An earlier note in this file said recovery needed a reload. It did not — what needed relaunching was
+the *whole UI stack*, because killing `rosbridge_websocket` from a `ros2 launch` supervisor takes the
+flask node down with it. Restarting rosbridge alone, with flask still up, reconnects as above.)
 
 Not measured here: the platform-side zeroing during the outage. `velocity_smoother`'s
 `velocity_timeout: 0.3` is the mechanism, evidenced separately; this run is about the UI's behaviour.
@@ -178,3 +182,21 @@ So the locked state is enforced for direct action clients as well, not only for 
 `/goal_pose` path: a mission cannot be queued behind a Stop. That was the substantive risk in the
 mission path; what remains unmeasured is multi-step sequencing and Stop mid-mission, which need
 waypoints loaded from a map.
+
+## 9. Freshness check — what `main` has gained since the merge
+
+Measured tree: platform `3aa17d2` (merge `98654688`). At the time of writing, `main` is three commits
+ahead:
+
+```
+930f09e  legal: contributor agreement wording        (docs only)
+f45b9cc  legal: approved LGPL dependencies in NOTICE (docs only)
+13d47f63 fix(nav2): handle lowercase use_composition in nav and loc launch
+```
+
+`13d47f63` changes `navigation_launch.py` and `localization_launch.py` from
+`IfCondition(PythonExpression(['not ', use_composition]))` to `UnlessCondition(use_composition)`, and
+adds a launch-context test for all four string forms. For the profile used here
+(`use_composition` unset, i.e. `False`) both forms evaluate the same, so the launched graph is the one
+measured — but it is a change to the launch file the run used, so it is stated rather than assumed
+harmless. None of the three touches the gate, the mux, the relay, the proxies, or the UI.
