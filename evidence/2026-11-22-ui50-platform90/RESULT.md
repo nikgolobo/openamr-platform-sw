@@ -136,3 +136,29 @@ Not measured here: the platform-side zeroing during the outage. `velocity_smooth
 Environment note for anyone repeating it: killing rosbridge and restarting the *whole* UI launch leaves
 port 9090 closed while flask still serves 5050, which looks like "the UI never reconnects". Restart
 `rosbridge_websocket` alone and the reconnect path behaves as above.
+
+## 7. Defect found on the merged head: a cancel reports ABORTED
+
+Measured after the merge, on `3aa17d2`, to check whether the review item had been fixed. It had not
+been — what landed was the bounded wait for the public cancel to arrive, not the terminal-code mapping.
+
+```
+release: released
+goal on /goal_pose   -> public=2 EXECUTING, real=2 EXECUTING
+cancel (zero id)     -> return_code=0, cancelled_goals=1
+  t+2s               -> public=5, real=5
+FINAL public=5 (ABORTED)  real=5 (ABORTED)
+odom travel during the probe: 0.4734 m      (the cancel did stop the robot)
+```
+
+The cancel is accepted and motion stops, so this is not a safety defect — it is a reporting one. A UI
+that distinguishes "cancelled" from "failed" shows the operator's own cancel as a failure.
+
+Cause, in `navigate_to_pose_goal_proxy_node.py` on `main`: only `STATUS_CANCELED` is special-cased;
+`ABORTED` reaches the final `else: abort()`. The same shape is in
+`navigate_through_poses_goal_proxy_node.py`, so both public actions are affected.
+
+Filed as `openAMRobot/openamr-platform-sw#189` with reproduction, the two-line fix (map "cancel
+requested" plus any non-success result to `canceled()`) and the test that is missing: a public cancel
+whose real server ends ABORTED. Existing tests cover only the CANCELED case, which is why CI is green
+with this in.
