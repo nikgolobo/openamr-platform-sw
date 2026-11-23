@@ -73,8 +73,10 @@ Probe polls `/safety/stop_lock_release` every 2 s from a clean boot and **never 
 1. **≈12 s is the simulated clock crawling to 1.0 s of sim time** at startup on a GPU-less VM with
    Gazebo under software GL. The gate requires 1.0 s of clock before it will consider a release; on
    hardware sim time is wall time, so this term disappears.
-2. **≈2 s is the ledger discovery grace** — the part that carries to the robot, and the part that
-   matches D-13's 2 s bound.
+2. **The ledger discovery grace cleared inside the next 2 s window** — refused at 13.9 s, released at
+   15.9 s. At this probe's 2 s polling resolution that is "no longer than 2 s", not "2 s by design";
+   a finer probe would be needed to state the constant itself. This is the part that carries to the
+   robot, and the part D-13's 2 s bound is about.
 
 So: the platform behaves as designed here, but this run **cannot** evidence D-13's "Resume available
 within 2 s on a clean boot"; it only shows the ledger grace is ~2 s once the clock exists. That number
