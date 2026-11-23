@@ -162,3 +162,19 @@ Filed as `openAMRobot/openamr-platform-sw#189` with reproduction, the two-line f
 requested" plus any non-success result to `canceled()`) and the test that is missing: a public cancel
 whose real server ends ABORTED. Existing tests cover only the CANCELED case, which is why CI is green
 with this in.
+
+## 8. A goal on the public action is refused while Stop is engaged
+
+This is the assumption mission control rests on. `waypoint_nav.py` executes missions with Nav2's
+`BasicNavigator`, which sends `NavigateToPose` goals **straight at the public action** — the one the
+proxy fronts — not through `/goal_pose`.
+
+```
+engage: already engaged
+sent on the PUBLIC action while Stop engaged -> accepted=False
+```
+
+So the locked state is enforced for direct action clients as well, not only for the operator's
+`/goal_pose` path: a mission cannot be queued behind a Stop. That was the substantive risk in the
+mission path; what remains unmeasured is multi-step sequencing and Stop mid-mission, which need
+waypoints loaded from a map.

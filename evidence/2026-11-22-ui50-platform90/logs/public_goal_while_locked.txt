@@ -1,0 +1,4 @@
+# public_goal_while_locked.py on merged head 3aa17d2, nav-only, lock engaged
+engage: already engaged
+sent on the PUBLIC action while Stop engaged -> accepted=False
+release: navigate_to_pose: action-status discovery grace period not yet elapsed (goal-authority ledger read idle); navigate_through_poses: same
