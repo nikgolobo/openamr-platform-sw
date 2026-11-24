@@ -1,0 +1,9 @@
+# c42a972 (release pin, #164 merge) — nav-only profile, clean stack
+release attempt 1: refused (action-status discovery grace period not yet elapsed)
+release attempt 2: released
+[1] goal on /goal_pose  -> public EXECUTING, travel 0.406 m, max|v| 0.200 m/s
+[2] cancel (zero id)    -> cancelled=1, terminal code 5 ABORTED
+[3] Stop mid-goal       -> public [5, 5], lock -> last nonzero 62 ms, travel after 0.022 m, settled 0.000
+[4] goal while stopped  -> rejected, no nonzero /cmd_vel
+[5] Resume              -> 0.000 m
+[6] new goal after Resume -> 0.482 m
